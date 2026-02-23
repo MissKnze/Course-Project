@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Game Menu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Cherry Bomb One', cursive;
+    background: #4895b9;
+    color: rgb(255, 245, 245);
+    min-height: 100vh;
+    padding: 40px;
+    font-size: 28px;
+    
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* MENU GRID */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    align-items: stretch;
+    width: 100%;
+}
+/* PANELS */
+.panel {
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 24px;
+    padding: 30px;
+    text-align: center;
+    min-height: 100px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.panel:hover {
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 0 0 30px rgba(247, 148, 225, 0.966);
+}
+
+/* GAME AREA */
+.game-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 690px;
+    aspect-ratio: 690 / 450;
+    margin: 30px auto;
+}
+
+#bgCanvas,
+#gameCanvas {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 15px;
+}
+
+#bgCanvas {
+    background: #ffccd9;
+}
+
+/* PLAY BUTTON */
+.play-btn {
+    margin-top: 20px;
+    padding: 14px 32px;
+    font-size: 22px;
+    font-family: 'Cherry Bomb One', cursive;
+    border-radius: 30px;
+    border: none;
+    background: #ffccd9;
+    color: #3a1a4f;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.play-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255,182,230,0.8);
+}
+
+/* BACK BUTTON */
+.back {
+    margin-bottom: 30px;
+    padding: 10px 22px;
+    border-radius: 30px;
+    border: none;
+    background: #ffccd9;
+    color: #4d2e61;
+    font-family: 'Cherry Bomb One', cursive;
+    cursor: pointer;
+    font-size: 24px;
+}
+.animations {
+            margin: 20px;
+            padding: 16px;
+            height: 600px;
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: 15px;
+            background-color: #ffccd9;
+        }
+
+ #ball{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #420313;
+            display: inline-block;
+            
+            animation: bounce .5s;
+            animation-direction: alternate;
+            animation-timing-function: cubic-bezier(.5, 0.05, 1, .5);
+            animation-iteration-count: infinite;
+        }
+        @keyframes bounce{
+            from{
+                transform: translate3d(0, 0, 0)
+            }
+            to{
+                transform: translate3d(0, 575px, 0);
+            }
+        }
+        #h1 {
+            margin: 20px;
+            width: 1%;
+            background-color: none;
+            text-align: center;
+        }
+        .animations {
+            margin: 20px;
+            padding: 16px;
+            border: 1px solid ;
+            border-radius: 15px;
+        }
+        .transitions {
+            margin: 20px;
+            padding: 16px;
+            border: 1px solid ;
+            border-radius: 15px;
+            background-color:#ffccd9;
+        }
+        img{
+            width: 50px;
+        }
+        #a1 { animation: move1 5s 3;}
+        @keyframes move1 {
+            0% { transform: translateX(0px);}
+            50% { transform: translateX(160px);}
+            100% { transform: translateX(0px);}
+        }        
+        #a2 { animation: move2 5s 5;}
+        @keyframes move2 {
+            0% {transform: translateX(0px) rotate(0deg);}
+            50% {transform: translateX(160px) rotate(360deg);}
+            100% {transform: translateX(0px) rotate(0deg);}
+        }
+        #a3 {animation: move3 10s 5;}
+        @keyframes move3 {
+            0% {transform: translateX(0px) rotate(0deg);}
+            25% {transform: translateX(160px) rotate(360deg);}
+            50% {transform: translateX(0px) rotate(0deg);}
+            75% {transform: translateX(-160px) rotate(-360deg);}
+            100% {transform: translateX(0px) rotate(0deg);}
+        }
+         #t1 { transition: transform 1s; }
+            #t1:hover {
+                cursor: pointer;
+                transform: rotateX(145deg);
+            }        
+            #t2 { transition: transform 1s; }
+            #t2:hover {
+                cursor: pointer;
+               transform: rotateZ(225deg) scale(.8);
+            }
+            #t3 {
+                transition: transform 0.5s; 
+            }
+            #t3:hover {
+                cursor: pointer;
+               transform: rotateY(145deg) scale(1.1);
+            }
+            #t8 {
+    transition: transform 0.8s ease, box-shadow 0.8s ease;
+}
+#t:hover {
+    cursor: pointer;
+    transform: rotate(360deg) scale(1.2);
+    box-shadow: 0 0 25px rgba(255,182,230,0.8);
+}
+
+         #myBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            background-color: #ffccd9;
+            color: #4d2e61;
+            cursor: pointer;
+            padding: 14px 18px;
+            border-radius: 30px;
+            font-family: 'Cherry Bomb One', cursive;
+
+        }
+
+        #myBtn:hover {
+            background-color: #f7a6d7;
+            transform: scale(1.1);
+            }
+        .game2-wrapper{
+            position: relative;
+            width: 100%;
+            max-width: 690px;
+            aspect-ratio: 690 / 450;
+            margin: 30px auto;
+        }
+        #catchCanvas{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 15px;
+            background-color: #ffccd9;
+        }
+</style>
+
+<script>
+// Show button when scrolling down
+window.onscroll = function () {
+    const btn = document.getElementById("myBtn");
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        btn.style.display = "block";
+    } else {
+        btn.style.display = "none";
+    }
+};
+// Scroll to top
+function topFunction() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+</script>
+</head>
+
+<body>
+<a href="main.html"><button class="back">HOME</button></a>
+<div class="menu-grid">
+
+    <!-- PANEL 1 -->
+    <div class="panel">
+        <h2>Animations</h2>
+        <p>Movement Effects</p>
+
+        <div class="animations">
+            <div id="ball"></div>
+        </div>
+
+        <div class="animations">
+            <h2>CSS Animation 1</h2>
+            <img id="a1" src="images/a1.png" alt="animated image">
+
+            <h2>CSS Animation 2</h2>
+            <img id="a2" src="images/a2.png" alt="animated image">
+
+            <h2>CSS Animation 3</h2>
+            <img id="a3" src="images/a3.png" alt="animated image">
+        </div>
+    </div>
+
+    <!-- PANEL 2 -->
+    <div class="panel">
+        <h2>Mini Game</h2>
+        <p>Click all the balls!</p>
+
+        <div class="game-wrapper">
+            <canvas id="bgCanvas" width="690" height="450"></canvas>
+            <canvas id="gameCanvas" width="690" height="450"></canvas>
+        </div>
+
+        <button id="playBtn" class="play-btn">Play Game</button>
+
+        <h2>Mini Game 2</h2>
+        <p>Catch the square using mouse movement</p>
+
+        <div class="game2-wrapper">
+            <canvas id="catchCanvas" width="600" height="400"></canvas>
+        </div>
+
+        <button id="startCatch" class="play-btn">Play / Restart</button>
+    </div>
+
+    <!-- PANEL 3 -->
+    <div class="panel">
+        <h2>Transitions</h2>
+
+        <div class="transitions">
+            <h2>CSS Transition 1</h2>
+            <img id="t1" src="images/a1.png" alt="transitioned image">
+
+            <h2>CSS Transition 2</h2>
+            <img id="t2" src="images/a2.png" alt="transitioned image">
+
+            <h2>CSS Transition 3</h2>
+            <img id="t3" src="images/a3.png" alt="transitioned image">
+        </div>
+    </div>
+
+</div>
+    </div>
+
+</div>
+
+<script>
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+const playBtn = document.getElementById("playBtn");
+
+const pop = new Audio("pop.wav");
+
+let balls = [];
+let animationId = null;
+let playing = false;
+
+const BALL_COUNT = 5;
+
+/* BALL CLASS */
+class Ball {
+    constructor(x, y, r, vx, vy, color) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.vx = vx;
+        this.vy = vy;
+        this.color = color;
+    }
+
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < this.r || this.x > canvas.width - this.r) this.vx *= -1;
+        if (this.y < this.r || this.y > canvas.height - this.r) this.vy *= -1;
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    
+}
+
+/* UTILS */
+function rand(min, max) {
+    return min + Math.random() * (max - min);
+}
+
+/* INIT GAME */
+function initGame() {
+    balls = [];
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < BALL_COUNT; i++) {
+        balls.push(
+            new Ball(
+                rand(30, 410),
+                rand(30, 320),
+                rand(15, 25),
+                rand(1, 2),
+                rand(1, 2),
+                `hsl(${Math.random() * 360}, 100%, 60%)`
+            )
+        );
+    }
+}
+
+/* GAME LOOP */
+function gameLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    balls.forEach(ball => {
+        ball.update();
+        ball.draw();
+    });
+
+    if (balls.length === 0) {
+        ctx.fillStyle = "#4895b9";
+        ctx.font = "40px 'Cherry Bomb One', cursive";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+        playing = false;
+        playBtn.textContent = "Restart Game";
+        return;
+    }
+
+    animationId = requestAnimationFrame(gameLoop);
+}
+
+/* CLICK BALLS */
+canvas.addEventListener("mousedown", e => {
+    if (!playing) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    for (let i = balls.length - 1; i >= 0; i--) {
+        const b = balls[i];
+        if (Math.hypot(x - b.x, y - b.y) < b.r) {
+            pop.play();
+            balls.splice(i, 1);
+            break;
+        }
+    }
+});
+
+/* PLAY / RESTART */
+playBtn.addEventListener("click", () => {
+    cancelAnimationFrame(animationId);
+    initGame();
+    playing = true;
+    playBtn.textContent = "Restart Game";
+    gameLoop();
+});
+
+/* ===== CATCH THE SQUARE GAME ===== */
+const cCanvas = document.getElementById("catchCanvas");
+const cCtx = cCanvas.getContext("2d");
+const startCatch = document.getElementById("startCatch");
+
+let player, square, score, running;
+const speed = 5;
+
+function resetCatchGame() {
+    player = { x: 260, y: 360, w: 80, h: 20 };
+    square = { x: Math.random() * 560, y: 0, size: 30, vy: 3 };
+    score = 0;
+    running = true;
+    catchLoop();
+}
+
+function drawCatch() {
+    cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
+
+    // Player
+    cCtx.fillStyle = "#420313";
+    cCtx.fillRect(player.x, player.y, player.w, player.h);
+
+    // Square
+    cCtx.fillStyle = "#7a1fa2";
+    cCtx.fillRect(square.x, square.y, square.size, square.size);
+
+    // Score
+    cCtx.fillStyle = "#4895b9";
+    cCtx.font = "24px 'Cherry Bomb One'";
+    cCtx.fillText("Score: " + score, 20, 30);
+}
+
+function updateCatch() {
+    square.y += square.vy;
+
+    // Catch
+    if (
+        square.y + square.size >= player.y &&
+        square.x + square.size > player.x &&
+        square.x < player.x + player.w
+    ) {
+        score++;
+        square.y = 0;
+        square.x = Math.random() * 560;
+        square.vy += 0.3;
+    }
+
+    // Miss
+    if (square.y > cCanvas.height) {
+        running = false;
+        cCtx.fillText("Game Over!", 220, 200);
+        return;
+    }
+}
+
+function catchLoop() {
+    if (!running) return;
+    updateCatch();
+    drawCatch();
+    requestAnimationFrame(catchLoop);
+}
+
+cCanvas.addEventListener("mousemove", e => {
+    if (!running) return;
+
+    const rect = cCanvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+
+    // Center paddle on mouse
+    player.x = mouseX - player.w / 2;
+
+    // Keep paddle inside canvas
+    player.x = Math.max(0, Math.min(cCanvas.width - player.w, player.x));
+});
+
+startCatch.addEventListener("click", resetCatchGame);
+</script>
+
+</body>
+<button onclick="topFunction()" id="myBtn" title="Go to top">⬆ Top</button>
+</html>

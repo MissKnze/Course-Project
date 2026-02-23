@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Animation Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Cherry Bomb One Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Cherry Bomb One', cursive;
+            background: #4895b9;
+            color: rgb(255, 255, 255);
+            overflow-x: hidden;
+            font-size: 44px;
+        }
+
+        /* ---------- LOADING ---------- */
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            background: #4895b9;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            transition: opacity 1s ease;
+        }
+
+        #loading-screen.fade {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-bar {
+            width: clamp(200px, 60vw, 300px);
+            height: 18px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.25);
+            overflow: hidden;
+        }
+
+        .loading-bar span {
+            display: block;
+            height: 100%;
+            width: 0%;
+            background: #ffccd9;
+            animation: load 3s forwards;
+        }
+
+        @keyframes load {
+            to { width: 100%; }
+        }
+
+        /* ---------- ABOUT ---------- */
+        #about {
+            min-height: 50vh;
+            padding: clamp(30px, 6vw, 80px);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #about p {
+            max-width: 600px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        button {
+            margin-top: 30px;
+            padding: 12px 26px;
+            border-radius: 30px;
+            border: none;
+            background: #ffccd9;
+            color: #3a1a4f;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-size: 36px;
+            font-family: 'Cherry Bomb One', cursive;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+        #myBtn {
+            display: none; /* hidden by default */
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            font-size: 24px;
+            border: none;
+            outline: none;
+            background-color: #ffccd9;
+            color: #3a1a4f;
+            cursor: pointer;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-family: 'Cherry Bomb One', cursive;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        #myBtn:hover {
+            background-color: #f7a6d7;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- LOADING -->
+<div id="loading-screen">
+    <h1>LOADING . . .</h1>
+    <div class="loading-bar">
+        <span></span>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+    <h1>About This Portfolio</h1>
+<div class="panel">
+    <p>Hello! I'm Adanaca Duffy, the creator of this animations portfolio. I love and have experiences creating fun interactive content using HTML, CSS, and JavaScript.</p>
+</div>
+
+<div class="panel">
+    <h2>Purpose</h2>
+    <p>This portfolio is designed to showcase HTML5, animations, CSS transitions, and interactive mini games.</p>
+</div>
+
+<div class="panel">
+    <h2>Technologies Used</h2>
+    <p>The games and animations are built with:</p>
+    <ul>
+        <li>HTML5 Canvas & DOM</li>
+        <li>CSS Animations & Transitions</li>
+        <li>JavaScript for interactivity</li>
+    </ul>
+</div>
+
+<div class="panel">
+    <h2>Contact</h2>
+    <p>If you want to get in touch, vist my other works, or give feedback, visit my GitHub profile: <a href="https://github.com/MissKnze" target="_blank">Adanaca Duffy's GitHub</a></p>
+</div>
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">⬆ Top</button>    
+
+    <!-- LINK TO MENU PAGE -->
+    <a href="menu.html">
+        <button>ENTER</button>
+    </a>
+</section>
+
+<script>
+    setTimeout(() => {
+        document.getElementById("loading-screen").classList.add("fade");
+        document.getElementById("about").style.display = "flex";
+    }, 3000);
+
+// Show button when scrolling down
+window.onscroll = function () {
+    const btn = document.getElementById("myBtn");
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        btn.style.display = "block";
+    } else {
+        btn.style.display = "none";
+    }
+};
+// Scroll to top
+function topFunction() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+</script>
+
+</body>
+</html>
