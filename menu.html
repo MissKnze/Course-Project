@@ -276,13 +276,13 @@ function topFunction() {
 
         <div class="animations">
             <h2>CSS Animation 1</h2>
-            <img id="a1" src="a1.png" alt="animated image">
+            <img id="a1" src="images/a1.png" alt="animated image">
 
             <h2>CSS Animation 2</h2>
-            <img id="a2" src="a2.png" alt="animated image">
+            <img id="a2" src="images/a2.png" alt="animated image">
 
             <h2>CSS Animation 3</h2>
-            <img id="a3" src="a3.png" alt="animated image">
+            <img id="a3" src="images/a3.png" alt="animated image">
         </div>
     </div>
 
@@ -314,13 +314,13 @@ function topFunction() {
 
         <div class="transitions">
             <h2>CSS Transition 1</h2>
-            <img id="t1" src="a1.png" alt="transitioned image">
+            <img id="t1" src="images/a1.png" alt="transitioned image">
 
             <h2>CSS Transition 2</h2>
-            <img id="t2" src="a2.png" alt="transitioned image">
+            <img id="t2" src="images/a2.png" alt="transitioned image">
 
             <h2>CSS Transition 3</h2>
-            <img id="t3" src="a3.png" alt="transitioned image">
+            <img id="t3" src="images/a3.png" alt="transitioned image">
         </div>
     </div>
 
@@ -330,19 +330,17 @@ function topFunction() {
 </div>
 
 <script>
+/* ===== CLICK THE BALL GAME ===== */
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const playBtn = document.getElementById("playBtn");
-
 const pop = new Audio("pop.wav");
 
 let balls = [];
 let animationId = null;
 let playing = false;
-
 const BALL_COUNT = 5;
 
-/* BALL CLASS */
 class Ball {
     constructor(x, y, r, vx, vy, color) {
         this.x = x;
@@ -357,8 +355,11 @@ class Ball {
         this.x += this.vx;
         this.y += this.vy;
 
-        if (this.x < this.r || this.x > canvas.width - this.r) this.vx *= -1;
-        if (this.y < this.r || this.y > canvas.height - this.r) this.vy *= -1;
+        // Bounce off canvas edges
+        if (this.x < this.r) { this.x = this.r; this.vx *= -1; }
+        if (this.x > canvas.width - this.r) { this.x = canvas.width - this.r; this.vx *= -1; }
+        if (this.y < this.r) { this.y = this.r; this.vy *= -1; }
+        if (this.y > canvas.height - this.r) { this.y = canvas.height - this.r; this.vy *= -1; }
     }
 
     draw() {
@@ -367,11 +368,9 @@ class Ball {
         ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
         ctx.fill();
     }
-
-    
 }
 
-/* UTILS */
+/* UTILITY */
 function rand(min, max) {
     return min + Math.random() * (max - min);
 }
@@ -382,13 +381,14 @@ function initGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     for (let i = 0; i < BALL_COUNT; i++) {
+        const r = rand(20, 35);
         balls.push(
             new Ball(
-                rand(30, 410),
-                rand(30, 320),
-                rand(15, 25),
-                rand(1, 2),
-                rand(1, 2),
+                rand(r, canvas.width - r),   // full canvas width
+                rand(r, canvas.height - r),  // full canvas height
+                r,
+                rand(2, 4),                   // faster horizontal speed
+                rand(2, 4),                   // faster vertical speed
                 `hsl(${Math.random() * 360}, 100%, 60%)`
             )
         );
@@ -423,8 +423,8 @@ canvas.addEventListener("mousedown", e => {
     if (!playing) return;
 
     const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const y = (e.clientY - rect.top) * (canvas.height / rect.height);
 
     for (let i = balls.length - 1; i >= 0; i--) {
         const b = balls[i];
@@ -436,7 +436,7 @@ canvas.addEventListener("mousedown", e => {
     }
 });
 
-/* PLAY / RESTART */
+/* PLAY / RESTART BUTTON */
 playBtn.addEventListener("click", () => {
     cancelAnimationFrame(animationId);
     initGame();
@@ -526,6 +526,4 @@ startCatch.addEventListener("click", resetCatchGame);
 
 </body>
 <button onclick="topFunction()" id="myBtn" title="Go to top">⬆ Top</button>
-
 </html>
-
